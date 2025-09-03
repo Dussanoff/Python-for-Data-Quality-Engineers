@@ -38,4 +38,6 @@ for i in range(len(a)):
 
 evenAvg = evenSum / evenCount
 oddAvg = oddSum / oddCount
-#print(evenAvg, '\n', oddAvg)
+
+#print both average result in console
+print(evenAvg, '\n', oddAvg)
