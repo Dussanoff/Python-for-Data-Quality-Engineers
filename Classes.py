@@ -77,26 +77,28 @@ class DailyHoroscope:
         return f"{self.__class__.__name__}\n{self.text}\nZodiac sign: {self.zodiac_sign}, {self.date.strftime("%Y-%m-%d %H:%M:%S")}\n\n"
 
 class Main:
-    welcoming_message = input("What do you want to add?\nNews - 1,\nPrivate Ad - 2,\nDailyHoroscope - 3.\n")
-    while welcoming_message in ("1", "2", "3"):
-        if welcoming_message.strip() == "1":
-            article = News(Article.input_text(), input("Provide the city\n"))
-        elif welcoming_message.strip() == "2":
-            expiration_date = input("Provide the expiration date in format YYYY-MM-DD\n")
-            try:
-                datetime.strptime(expiration_date, "%Y-%m-%d")
-            except:
+    @staticmethod
+    def main():
+        welcoming_message = input("What do you want to add?\nNews - 1,\nPrivate Ad - 2,\nDailyHoroscope - 3.\n")
+        while welcoming_message in ("1", "2", "3"):
+            if welcoming_message.strip() == "1":
+                article = News(Article.input_text(), input("Provide the city\n"))
+            elif welcoming_message.strip() == "2":
+                expiration_date = input("Provide the expiration date in format YYYY-MM-DD\n")
+                try:
+                    datetime.strptime(expiration_date, "%Y-%m-%d")
+                except:
+                    print("\nIncorrect value! Try again.")
+                    break
+                article = PrivateAd(Article.input_text(), expiration_date)
+            elif welcoming_message.strip() == "3":
+                article = DailyHoroscope(Article.input_text(), input("Provide the zodiac sign\n"))
+            else:
                 print("\nIncorrect value! Try again.")
                 break
-            article = PrivateAd(Article.input_text(), expiration_date)
-        elif welcoming_message.strip() == "3":
-            article = DailyHoroscope(Article.input_text(), input("Provide the zodiac sign\n"))
-        else:
-            print("\nIncorrect value! Try again.")
-            break
-        with open("articles.txt", "a") as articles_txt:
-            articles_txt.write(article.str())
-            break
+            with open("articles.txt", "a") as articles_txt:
+                articles_txt.write(article.str())
+                break
 
 
 

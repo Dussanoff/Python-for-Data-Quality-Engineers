@@ -1,0 +1,12 @@
+[
+  {
+    "type": "News",
+    "expiration_date": "London",
+    "text": "Something happened"
+  },
+  {
+    "type": "News",
+    "expiration_date": "Minsk",
+    "text": "Something other happened"
+  }
+]
