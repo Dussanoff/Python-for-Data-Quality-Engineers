@@ -17,7 +17,7 @@ string = """homEwork:
 
 
 # Step 1: Normalize the text to lowercase and remove extra spaces
-normalize = lambda string: string.lower().replace("  ", "")  # Convert the entire string to lowercase and remove extra spaces
+normalize = lambda string: string.capitalize().replace("  ", "")  # Convert the entire string to lowercase and remove extra spaces
 string1 = normalize(string)
 #print(string1)
 

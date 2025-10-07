@@ -12,6 +12,7 @@ import json
 from Classes import News
 from Classes import PrivateAd
 from Classes import DailyHoroscope
+import StringObject
 
 class Main:
     path = "inputs"
@@ -19,27 +20,32 @@ class Main:
         if isinstance(file, str) and file.endswith('.json'):
             recycle = f"{path}/recycle/{file}"
             file_path = f"{path}/{file}"
+            to_remove = False
             with open(f"{file_path}", 'r') as input_file:
                 str_json = input_file.read().replace("\n", "")
                 articles_json = json.loads(str_json)
             try:
                 for record in articles_json:
-                    if record["type"] == "News":
-                        article = News(record["text"], record["city"])
-                    elif record["type"] == "Private Ad":
-                        expiration_date = record["expiration_date"]
+                    if StringObject.normalize(record["type"]) == "News":
+                        article = News(StringObject.normalize(record["text"]), StringObject.normalize(record["city"]))
+                        to_remove = True
+                    elif StringObject.normalize(record["type"]) == "Private ad":
+                        expiration_date = StringObject.normalize(record["expiration_date"])
                         try:
                             datetime.strptime(expiration_date, "%Y-%m-%d")
                         except:
-                            print(f"Incorrect expiration date in the record {record} in the {file_path}! Try another file.")
-                            continue
-                        article = PrivateAd(record["text"], expiration_date)
-                    elif record["type"] == "Daily Horoscope":
-                        article = DailyHoroscope(record["text"], record["zodiac_sign"])
+                            print(f"Incorrect expiration date in the record {record} in the {file}! Try another file.")
+                            break
+                        article = PrivateAd(StringObject.normalize(record["text"]), expiration_date)
+                        to_remove = True
+                    elif StringObject.normalize(record["type"]) == "Daily horoscope":
+                        article = DailyHoroscope(StringObject.normalize(record["text"]), StringObject.normalize(record["zodiac_sign"]))
+                        to_remove = True
                     else:
-                        print(f"Incorrect type {file_path}! Try another file.")
-                        continue
+                        print(f"Incorrect type {file}! Try another file.")
+                        break
                     with open("articles.txt", "a") as articles_txt:
                         articles_txt.write(article.str())
-            finally:
-                os.rename(f"{file_path}", f"{recycle}")
+            except: print(Exception)
+            if to_remove == True : os.rename(f"{file_path}", f"{recycle}")
+
