@@ -96,14 +96,6 @@ class Main:
             else:
                 print("\nIncorrect value! Try again.")
                 break
-            with open("articles.txt", "a") as articles_txt:
+            with open("outputs/articles.txt", "a") as articles_txt:
                 articles_txt.write(article.str())
                 break
-
-
-
-
-
-
-
-

@@ -1,0 +1,12 @@
+[
+  {
+    "type": "News",
+    "city": "London",
+    "text": "Something happened"
+  },
+  {
+    "type": "News",
+    "city": "Minsk",
+    "text": "Something other happened"
+  }
+]

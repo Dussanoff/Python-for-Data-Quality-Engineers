@@ -44,10 +44,12 @@ def change_list(l  = letters):
             if letter in dictA.keys():  # Check if the current key exists in the dictionary
                 dictACopy = dictA.copy()  # Create a copy of the dictionary to avoid modifying the original
                 tempDict[a.index(dictA)] = dictACopy.pop(letter)  # Store the value of the key and its dictionary index
+                """
                 if letter in duplicatedDict.keys():  # If the key already exists in `duplicatedDict`
                     duplicatedDict[letter] = duplicatedDict.get(letter) | tempDict  # Merge occurrences
                 else:
-                    duplicatedDict[letter] = tempDict  # Add the key and its occurrences to `duplicatedDict`
+                    duplicatedDict[letter] = tempDict  # Add the key and its occurrences to `duplicatedDict`"""
+                duplicatedDict[letter] = duplicatedDict.get(letter) | tempDict if letter in duplicatedDict.keys() else tempDict
     #print("\nduplicatedDict: ", duplicatedDict)
 
     # Process the `duplicatedDict` to create the final combined dictionary

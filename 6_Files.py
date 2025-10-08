@@ -44,8 +44,8 @@ class Main:
                     else:
                         print(f"Incorrect type {file}! Try another file.")
                         break
-                    with open("articles.txt", "a") as articles_txt:
+                    with open("outputs/articles.txt", "a") as articles_txt:
                         articles_txt.write(article.str())
-            except: print(Exception)
-            if to_remove == True : os.rename(f"{file_path}", f"{recycle}")
+            except Exception as e: print(e)
+            if to_remove: os.rename(f"{file_path}", f"{recycle}")
 
