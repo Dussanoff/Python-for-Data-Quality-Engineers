@@ -1,0 +1,10 @@
+<articles>
+    <article type="News">
+		<city>London</city>
+		<text>Something happened</text>
+    </article>
+    <article type="News">
+		<city>Minsk</city>
+		<text>Something other happened</text>
+    </article>
+</articles>

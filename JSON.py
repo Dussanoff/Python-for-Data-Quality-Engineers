@@ -28,10 +28,8 @@ def read_json():
     for file in os.listdir(inputs):
         file_path = set_file_paths(file)
         if isinstance(file, str) and file.endswith('.json'):
-            to_remove = False
             with open(f"{file_path}", 'r') as input_file:
-                str_json = input_file.read().replace("\n", "")
-                articles_json = json.loads(str_json)
+                articles_json = json.loads(input_file.read().replace("\n", ""))
             try:
                 for record in articles_json:
                     text = "" if record["text"] is None else record["text"]
@@ -74,4 +72,4 @@ def write_json(arg):
     for file in set:
         os.rename(f"{set_file_paths(file)}", f"{set_recycle(file)}")
 
-write_json(read_json())
+#write_json(read_json())
