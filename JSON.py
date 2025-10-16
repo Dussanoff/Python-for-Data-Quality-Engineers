@@ -30,6 +30,7 @@ def read_json():
         if isinstance(file, str) and file.endswith('.json'):
             with open(f"{file_path}", 'r') as input_file:
                 articles_json = json.loads(input_file.read().replace("\n", ""))
+                input_file.close()
             try:
                 for record in articles_json:
                     text = "" if record["text"] is None else record["text"]

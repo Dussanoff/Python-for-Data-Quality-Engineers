@@ -21,8 +21,7 @@ from datetime import datetime
 
 class Article:
     def __init__(self, text):
-        self.text = text
-        self.date = datetime.today()
+        pass
 
     def publish(self, text):
         pass
@@ -39,7 +38,6 @@ class Article:
 
 class News(Article):
     def __init__(self, text, city):
-        Article(text)
         self.text = text
         self.city = city
         self.date = datetime.today()
@@ -52,7 +50,6 @@ class News(Article):
 
 class PrivateAd(Article):
     def __init__(self, text, expiration_date):
-        Article(text)
         self.text = text
         self.date = datetime.today()
         self.expiration_date = datetime.strptime(expiration_date, "%Y-%m-%d")
@@ -65,7 +62,6 @@ class PrivateAd(Article):
 
 class DailyHoroscope:
     def __init__(self, text, zodiac_sign):
-        Article(text)
         self.text = text
         self.date = datetime.today()
         self.zodiac_sign = zodiac_sign
