@@ -35,23 +35,8 @@ class City:
             print(f"{self}\n")
         else:
             coordinates = input("Provide a coordinates in Decimal Degrees (DD) format: XX.XXXX° N/S, XX.XXXX° E/W (Latitude: 0 - 90, Longitude: 0 - 180)\n")
-            #coordinates = "40.7606° N, 111.8881° W"
             if coordinates:
                 lat, long = City.format_coordinates(coordinates)
-                # ####
-                # latitude, longitude = coordinates.replace(" ", "").split(",")
-                # if latitude == "0.0000": lat = 0.0000
-                # else:
-                #     if latitude[-1] == "S": lat = -float(latitude[:-2].strip())
-                #     elif latitude[-1] == "N": lat = float(latitude[:-2].strip())
-                #     else: print("Incorrect latitude direction, can be only N or S")
-                #
-                # if longitude == "0.0000": long = 0.0000
-                # else:
-                #     if longitude[-1] == "W": long = -float(longitude[:-2].strip())
-                #     elif longitude[-1] == "E": long = float(longitude[:-2].strip())
-                #     else: print("Incorrect longitude direction, can be only E or W")
-                # ####
                 self.coordinates = {"latitude" : lat, "longitude" : long}
                 self.write_city()
             else: self.set_coordinates()

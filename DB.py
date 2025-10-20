@@ -47,12 +47,9 @@ class DB:
                 result = re.sub(r"\(|\)", "", str(row).replace("None", "null")) + "\n"
                 if result == values:
                     print(f"Row ({values})  has already exist in the table {table_name}! Try another file.")
-                else:
-                    self.execute(f"INSERT INTO {table_name} VALUES({values})")
-                    print(f"Row successfully added {values} into the table {table_name}! Try another file.")
-        else:
-            self.execute(f"INSERT INTO {table_name} VALUES({values})")
-            print(f"Row successfully added {values} into the table {table_name}! Try another file.")
+                    return
+        self.execute(f"INSERT INTO {table_name} VALUES({values})")
+        print(f"Row successfully added {values} into the table {table_name}! Try another file.")
 
 
     def select_from_table(self, table_name, columns="*"):
