@@ -41,14 +41,18 @@ class DB:
             self.execute(f"CREATE TABLE {table_name} ({columns})")
 
     def insert_into_table(self, table_name, values):
-        rows = self.select_from_table(table_name)
-        if rows != []:
+        rows = self.select_from_table(table_name).fetchall()
+        if rows:
             for row in rows:
                 result = re.sub(r"\(|\)", "", str(row).replace("None", "null")) + "\n"
                 if result == values:
-                    print(f"Row has already added {values} into the table {table_name}! Try another file.")
+                    print(f"Row ({values})  has already exist in the table {table_name}! Try another file.")
+                else:
+                    self.execute(f"INSERT INTO {table_name} VALUES({values})")
+                    print(f"Row successfully added {values} into the table {table_name}! Try another file.")
         else:
-                self.execute(f"INSERT INTO {table_name} VALUES({values})")
+            self.execute(f"INSERT INTO {table_name} VALUES({values})")
+            print(f"Row successfully added {values} into the table {table_name}! Try another file.")
 
 
     def select_from_table(self, table_name, columns="*"):
@@ -124,8 +128,8 @@ class DB:
             db.insert_into_table(table, values)
 
 
-
-connection_string = f"DRIVER={{SQLite3 ODBC Driver}};Direct=True;Database={os.path.join(os.path.dirname(__file__), "outputs", "articles.db")}"
-DB.write_json(DB.load_folder())
+if __name__ == "__main__":
+    connection_string = f"DRIVER={{SQLite3 ODBC Driver}};Direct=True;Database={os.path.join(os.path.dirname(__file__), "outputs", "articles.db")}"
+    DB.write_json(DB.load_folder())
 
 
